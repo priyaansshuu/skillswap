@@ -1,6 +1,6 @@
 [project]
 name = "skillswap-backend"
-version = "0.1.0"
+version = "0.2.0"
 description = "SkillSwap time-banking API for a college DBMS demonstration"
 requires-python = ">=3.12"
 

@@ -33,6 +33,21 @@ def blocked(db, first, second):
     )
 
 
+@router.get("/me/blocks", response_model=Page[PublicProfile])
+def list_blocks(
+    db: Db, user: CurrentUser, limit: int = Query(20, ge=1, le=100), offset: int = Query(0, ge=0)
+):
+    items = db.scalars(
+        select(User)
+        .join(Block, Block.blocked_id == User.id)
+        .where(Block.user_id == user.id)
+        .order_by(User.name, User.id)
+        .limit(limit)
+        .offset(offset)
+    ).all()
+    return Page(items=items, limit=limit, offset=offset)
+
+
 def public_user(db, user_id, viewer_id):
     user = db.get(User, user_id)
     if not user or not user.active or blocked(db, user_id, viewer_id):

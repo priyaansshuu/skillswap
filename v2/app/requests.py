@@ -1,10 +1,34 @@
-from fastapi import APIRouter, Query
-from sqlalchemy import or_, select
+import hashlib
+import json
+from typing import Literal
 
+from fastapi import APIRouter, Header, Query
+from sqlalchemy import or_, select, text
+
+from app.accounting import lock_users, wallet
+from app.discovery import provider_profiles
 from app.errors import require
-from app.matching import save_match_run
-from app.models import ExchangeRequest, MatchCandidate, MatchRun, Notification, Skill, now
-from app.schemas import MatchOut, MatchResults, Page, RequestInput, RequestOut, Selection
+from app.matching import rank_candidates, save_match_run
+from app.models import (
+    ExchangeRequest,
+    MatchCandidate,
+    MatchRun,
+    Notification,
+    RequestSubmission,
+    Skill,
+    User,
+    now,
+)
+from app.schemas import (
+    MatchOut,
+    MatchResults,
+    Page,
+    PreviewCandidate,
+    RequestInput,
+    RequestOut,
+    RequestPreview,
+    Selection,
+)
 from app.security import CurrentUser, Db
 
 router = APIRouter(tags=["Requests and matching"])
@@ -21,16 +45,114 @@ def load_request(db, request_id, user_id, lock=False, learner_only=False):
     return item
 
 
-@router.post("/requests", response_model=RequestOut, status_code=201)
-def create_request(payload: RequestInput, db: Db, user: CurrentUser):
+def request_draft(payload, db, user):
     require(
         db.get(Skill, payload.skill_id) is not None, "SKILL_NOT_FOUND", "Skill does not exist", 404
     )
     require(
         payload.window_start > now(), "PAST_REQUEST", "Request window must start in the future", 422
     )
-    item = ExchangeRequest(learner_id=user.id, **payload.model_dump())
+    return ExchangeRequest(learner_id=user.id, **payload.model_dump())
+
+
+@router.post("/requests/preview", response_model=RequestPreview)
+def preview_request(payload: RequestInput, db: Db, user: CurrentUser):
+    draft = request_draft(payload, db, user)
+    candidates, _ = rank_candidates(db, draft)
+    if payload.provider_id:
+        candidates = [c for c in candidates if c["provider_id"] == payload.provider_id]
+    available = wallet(db, user.id).available_minutes
+    eligible = bool(candidates) and available >= payload.duration_minutes
+    reason = None
+    if available < payload.duration_minutes:
+        reason = "You do not have enough available minutes for this duration."
+    elif not candidates:
+        reason = "No eligible member has a free slot in this window. Try another time or member."
+    candidates = candidates[:50]
+    ids = [c["provider_id"] for c in candidates]
+    profiles = {
+        p.id: p
+        for p in provider_profiles(db, db.scalars(select(User).where(User.id.in_(ids))).all())
+    }
+    return RequestPreview(
+        eligible=eligible,
+        reason=reason,
+        available_minutes=available,
+        candidates=[
+            PreviewCandidate(
+                provider=profiles[c["provider_id"]],
+                **{
+                    k: c[k]
+                    for k in ("offered_skill_id", "suggested_start", "score", "hierarchy_distance")
+                },
+            )
+            for c in candidates
+        ],
+    )
+
+
+@router.post("/requests", response_model=RequestOut, status_code=201)
+def create_request(
+    payload: RequestInput,
+    db: Db,
+    user: CurrentUser,
+    idempotency_key: str | None = Header(
+        default=None, min_length=8, max_length=128, pattern=r"^[A-Za-z0-9._:-]+$"
+    ),
+):
+    fingerprint = hashlib.sha256(
+        json.dumps(payload.model_dump(mode="json"), sort_keys=True).encode()
+    ).hexdigest()
+    if idempotency_key:
+        # Serialize only retries by this account/key, across workers and connections.
+        lock_id = int.from_bytes(
+            hashlib.sha256((user.id + ":" + idempotency_key).encode()).digest()[:8],
+            "big",
+            signed=True,
+        )
+        db.execute(text("SELECT pg_advisory_xact_lock(:key)"), {"key": lock_id})
+        previous = db.get(RequestSubmission, (user.id, idempotency_key))
+        if previous:
+            require(
+                previous.payload_hash == fingerprint,
+                "IDEMPOTENCY_CONFLICT",
+                "This submission key was already used for different request details",
+            )
+            return db.get(ExchangeRequest, previous.request_id)
+    item = request_draft(payload, db, user)
+    if payload.provider_id:
+        lock_users(db, user.id, payload.provider_id)
+        require(
+            wallet(db, user.id).available_minutes >= payload.duration_minutes,
+            "INSUFFICIENT_CREDITS",
+            "You do not have enough available time credits",
+        )
+        candidates, _ = rank_candidates(db, item)
+        candidate = next((c for c in candidates if c["provider_id"] == payload.provider_id), None)
+        require(
+            candidate is not None,
+            "SLOT_UNAVAILABLE",
+            "This member has no eligible free slot. Preview another time before requesting.",
+        )
+        item.offered_skill_id = candidate["offered_skill_id"]
+        item.selected_start = candidate["suggested_start"]
+        item.status = "REQUESTED"
     db.add(item)
+    db.flush()
+    if payload.provider_id:
+        db.add(
+            Notification(
+                user_id=payload.provider_id,
+                content="A learner requested a skill session",
+                resource_id=item.id,
+            )
+        )
+    if idempotency_key:
+        db.add(
+            RequestSubmission(
+                user_id=user.id, key=idempotency_key, payload_hash=fingerprint, request_id=item.id
+            )
+        )
     db.commit()
     return item
 
@@ -39,12 +161,20 @@ def create_request(payload: RequestInput, db: Db, user: CurrentUser):
 def list_requests(
     db: Db,
     user: CurrentUser,
+    role: Literal["all", "teaching", "learning"] = "all",
     limit: int = Query(default=20, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
 ):
+    ownership = (
+        ExchangeRequest.provider_id == user.id
+        if role == "teaching"
+        else ExchangeRequest.learner_id == user.id
+        if role == "learning"
+        else or_(ExchangeRequest.learner_id == user.id, ExchangeRequest.provider_id == user.id)
+    )
     items = db.scalars(
         select(ExchangeRequest)
-        .where(or_(ExchangeRequest.learner_id == user.id, ExchangeRequest.provider_id == user.id))
+        .where(ownership)
         .order_by(ExchangeRequest.created_at.desc(), ExchangeRequest.id)
         .limit(limit)
         .offset(offset)

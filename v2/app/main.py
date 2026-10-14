@@ -1,10 +1,12 @@
 import logging
+from pathlib import Path
 from uuid import uuid4
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
 from sqlalchemy.exc import IntegrityError, OperationalError, SQLAlchemyError
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -12,16 +14,19 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.catalog import router as catalog_router
 from app.config import get_settings
 from app.database import get_engine
+from app.discovery import router as discovery_router
 from app.evaluation import router as evaluation_router
 from app.identity import router as identity_router
 from app.requests import router as requests_router
 from app.sessions import router as sessions_router
+from app.suggestions import admin_router as suggestion_admin_router
+from app.suggestions import router as suggestions_router
 from app.trust import admin_router
 from app.trust import router as trust_router
 
 app = FastAPI(
     title="SkillSwap API",
-    version="0.1.0",
+    version="0.2.0",
     description="Time-banking and peer skill exchange for a local college demo.",
 )
 app.include_router(identity_router, prefix="/api/v1")
@@ -31,6 +36,9 @@ app.include_router(sessions_router, prefix="/api/v1")
 app.include_router(trust_router, prefix="/api/v1")
 app.include_router(admin_router, prefix="/api/v1")
 app.include_router(evaluation_router, prefix="/api/v1")
+app.include_router(discovery_router, prefix="/api/v1")
+app.include_router(suggestions_router, prefix="/api/v1")
+app.include_router(suggestion_admin_router, prefix="/api/v1")
 
 
 @app.middleware("http")
@@ -123,7 +131,7 @@ def ready():
                 "message": "Apply migrations and check the database connection",
             },
         ) from None
-    if version != "002_integrity":
+    if version != "003_frontend":
         raise HTTPException(
             503,
             detail={
@@ -140,5 +148,17 @@ app.add_middleware(
     allow_origins=get_settings().cors_origins,
     allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allow_headers=["Authorization", "Content-Type"],
+    allow_headers=["Authorization", "Content-Type", "Idempotency-Key"],
 )
+
+
+# A built frontend can be served by FastAPI for a single-process local demo.
+frontend_dist = Path(__file__).resolve().parents[1] / "frontend" / "dist"
+if (frontend_dist / "index.html").is_file():
+    app.mount("/assets", StaticFiles(directory=frontend_dist / "assets"), name="frontend-assets")
+
+    @app.get("/{path:path}", include_in_schema=False)
+    def frontend_page(path: str):
+        if path == "api" or path.startswith(("api/", "health/")):
+            raise HTTPException(404, "Not Found")
+        return FileResponse(frontend_dist / "index.html")

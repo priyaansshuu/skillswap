@@ -28,6 +28,7 @@ from app.schemas import (
     ResolveInput,
     ReviewInput,
     ReviewOut,
+    SessionOut,
 )
 from app.security import AdminUser, CurrentUser, Db
 from app.sessions import load_session, notify, release_session
@@ -184,6 +185,11 @@ def admin_disputes(
         limit=limit,
         offset=offset,
     )
+
+
+@admin_router.get("/sessions/{session_id}", response_model=SessionOut)
+def admin_session(session_id: str, db: Db, admin: AdminUser):
+    return load_session(db, session_id, admin.id, admin=True)
 
 
 @admin_router.post("/disputes/{dispute_id}/resolve", response_model=DisputeOut)

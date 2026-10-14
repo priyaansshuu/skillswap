@@ -114,6 +114,7 @@ class AvailabilityOut(Output):
 
 class RequestInput(Input):
     skill_id: str
+    provider_id: str | None = None
     duration_minutes: int = Field(ge=1, le=480)
     window_start: AwareDatetime
     window_end: AwareDatetime
@@ -275,3 +276,64 @@ class AuditOut(Output):
     resource_id: str
     details: dict
     created_at: datetime
+
+
+class ProviderOffer(Output):
+    skill_id: str
+    name: str
+    category: str
+    level: int
+
+
+class ProviderProfile(PublicProfile):
+    offers: list[ProviderOffer]
+    modes: list[str]
+    rating_average: float | None
+    rating_count: int
+    reputation_score: float
+
+
+class PreviewCandidate(BaseModel):
+    provider: ProviderProfile
+    offered_skill_id: str
+    suggested_start: datetime
+    score: float
+    hierarchy_distance: int
+
+
+class RequestPreview(BaseModel):
+    eligible: bool
+    reason: str | None
+    available_minutes: int
+    candidates: list[PreviewCandidate]
+
+
+class SuggestionInput(Input):
+    name: str = Field(min_length=1, max_length=100)
+    explanation: str = Field(default="", max_length=1000)
+
+
+class SuggestionOut(Output):
+    id: str
+    user_id: str
+    name: str
+    explanation: str
+    status: str
+    skill_id: str | None
+    resolution: str | None
+    created_at: datetime
+
+
+class SuggestionDecision(Input):
+    action: Literal["APPROVE", "REJECT"]
+    name: str | None = Field(default=None, min_length=1, max_length=100)
+    category: str | None = Field(default=None, min_length=1, max_length=100)
+    parent_id: str | None = None
+    skill_id: str | None = None
+    note: str = Field(min_length=5, max_length=1000)
+
+
+class AdminMember(PublicProfile):
+    email: str
+    active: bool
+    is_admin: bool

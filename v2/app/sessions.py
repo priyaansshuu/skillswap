@@ -101,13 +101,23 @@ def accept(request_id: str, db: Db, user: CurrentUser):
 def sessions(
     db: Db,
     user: CurrentUser,
+    upcoming: bool = False,
     limit: int = Query(default=20, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
 ):
+    statement = select(ExchangeSession).where(
+        or_(ExchangeSession.learner_id == user.id, ExchangeSession.provider_id == user.id)
+    )
+    if upcoming:
+        statement = statement.where(
+            ExchangeSession.status.in_(["SCHEDULED", "IN_PROGRESS"]),
+            ExchangeSession.ends_at > now(),
+        )
     items = db.scalars(
-        select(ExchangeSession)
-        .where(or_(ExchangeSession.learner_id == user.id, ExchangeSession.provider_id == user.id))
-        .order_by(ExchangeSession.starts_at.desc(), ExchangeSession.id)
+        statement.order_by(
+            ExchangeSession.starts_at if upcoming else ExchangeSession.starts_at.desc(),
+            ExchangeSession.id,
+        )
         .limit(limit)
         .offset(offset)
     ).all()

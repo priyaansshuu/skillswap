@@ -292,3 +292,29 @@ class AuthAttempt(Base):
     key: Mapped[str] = mapped_column(String(64), primary_key=True)
     bucket: Mapped[int] = mapped_column(Integer, primary_key=True)
     count: Mapped[int] = mapped_column(Integer, default=1)
+
+
+class RequestSubmission(Base):
+    __tablename__ = "request_submissions"
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id"), primary_key=True)
+    key: Mapped[str] = mapped_column(String(128), primary_key=True)
+    payload_hash: Mapped[str] = mapped_column(String(64))
+    request_id: Mapped[str] = mapped_column(ForeignKey("requests.id"))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+
+class SkillSuggestion(Base):
+    __tablename__ = "skill_suggestions"
+    __table_args__ = (
+        CheckConstraint("status IN ('PENDING','APPROVED','REJECTED')", name="suggestion_status"),
+        Index("ix_suggestions_user_created", "user_id", "created_at"),
+    )
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id"))
+    name: Mapped[str] = mapped_column(String(100))
+    explanation: Mapped[str] = mapped_column(String(1000), default="")
+    status: Mapped[str] = mapped_column(String(10), default="PENDING")
+    skill_id: Mapped[str | None] = mapped_column(ForeignKey("skills.id"))
+    resolution: Mapped[str | None] = mapped_column(String(1000))
+    decision: Mapped[dict | None] = mapped_column(JSON)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
