@@ -1,0 +1,171 @@
+{
+  "request_id": "c9c7fe79-b12b-5b3c-9081-fca84342bd9b",
+  "models": [
+    {
+      "algorithm": "full-v1",
+      "elapsed_ms": 30.903,
+      "weights": {
+        "skill": 0.4,
+        "reputation": 0.25,
+        "activity": 0.15,
+        "location": 0.1,
+        "availability": 0.1
+      },
+      "candidates": [
+        {
+          "provider_id": "61e83b1a-fbc2-598e-ba9c-8efb03b5997d",
+          "offered_skill_id": "51e91de0-58ed-53e6-9870-d99f22f63ef9",
+          "score": 0.8910235931321384,
+          "factors": {
+            "skill": 1.0,
+            "reputation": 0.6089648099628598,
+            "activity": 0.9252159376094895,
+            "location": 1.0,
+            "availability": 1.0
+          },
+          "suggested_start": "2026-10-14T15:30:00+05:30",
+          "hierarchy_distance": 0
+        },
+        {
+          "provider_id": "12ed978d-a84f-54ae-bbf1-609188f42b37",
+          "offered_skill_id": "51e91de0-58ed-53e6-9870-d99f22f63ef9",
+          "score": 0.8,
+          "factors": {
+            "skill": 1.0,
+            "reputation": 0.5,
+            "activity": 0.5,
+            "location": 1.0,
+            "availability": 1.0
+          },
+          "suggested_start": "2026-10-14T15:30:00+05:30",
+          "hierarchy_distance": 0
+        },
+        {
+          "provider_id": "cf64fbc9-c8cf-59d9-8ab0-ba4e5b85a4ef",
+          "offered_skill_id": "51e91de0-58ed-53e6-9870-d99f22f63ef9",
+          "score": 0.8,
+          "factors": {
+            "skill": 1.0,
+            "reputation": 0.5,
+            "activity": 0.5,
+            "location": 1.0,
+            "availability": 1.0
+          },
+          "suggested_start": "2026-10-14T15:30:00+05:30",
+          "hierarchy_distance": 0
+        }
+      ]
+    },
+    {
+      "algorithm": "exact-v1",
+      "elapsed_ms": 6.455,
+      "weights": {
+        "skill": 1.0,
+        "reputation": 0.0,
+        "activity": 0.0,
+        "location": 0.0,
+        "availability": 0.0
+      },
+      "candidates": [
+        {
+          "provider_id": "12ed978d-a84f-54ae-bbf1-609188f42b37",
+          "offered_skill_id": "51e91de0-58ed-53e6-9870-d99f22f63ef9",
+          "score": 1.0,
+          "factors": {
+            "skill": 1.0,
+            "reputation": 0.5,
+            "activity": 0.5,
+            "location": 1.0,
+            "availability": 1.0
+          },
+          "suggested_start": "2026-10-14T15:30:00+05:30",
+          "hierarchy_distance": 0
+        },
+        {
+          "provider_id": "61e83b1a-fbc2-598e-ba9c-8efb03b5997d",
+          "offered_skill_id": "51e91de0-58ed-53e6-9870-d99f22f63ef9",
+          "score": 1.0,
+          "factors": {
+            "skill": 1.0,
+            "reputation": 0.6089648082752652,
+            "activity": 0.9252159265122526,
+            "location": 1.0,
+            "availability": 1.0
+          },
+          "suggested_start": "2026-10-14T15:30:00+05:30",
+          "hierarchy_distance": 0
+        },
+        {
+          "provider_id": "cf64fbc9-c8cf-59d9-8ab0-ba4e5b85a4ef",
+          "offered_skill_id": "51e91de0-58ed-53e6-9870-d99f22f63ef9",
+          "score": 1.0,
+          "factors": {
+            "skill": 1.0,
+            "reputation": 0.5,
+            "activity": 0.5,
+            "location": 1.0,
+            "availability": 1.0
+          },
+          "suggested_start": "2026-10-14T15:30:00+05:30",
+          "hierarchy_distance": 0
+        }
+      ]
+    },
+    {
+      "algorithm": "skill-reputation-v1",
+      "elapsed_ms": 5.605,
+      "weights": {
+        "skill": 0.6153846153846154,
+        "reputation": 0.38461538461538464,
+        "activity": 0.0,
+        "location": 0.0,
+        "availability": 0.0
+      },
+      "candidates": [
+        {
+          "provider_id": "61e83b1a-fbc2-598e-ba9c-8efb03b5997d",
+          "offered_skill_id": "51e91de0-58ed-53e6-9870-d99f22f63ef9",
+          "score": 0.8496018492103289,
+          "factors": {
+            "skill": 1.0,
+            "reputation": 0.6089648079468549,
+            "activity": 0.9252159243527015,
+            "location": 1.0,
+            "availability": 1.0
+          },
+          "suggested_start": "2026-10-14T15:30:00+05:30",
+          "hierarchy_distance": 0
+        },
+        {
+          "provider_id": "12ed978d-a84f-54ae-bbf1-609188f42b37",
+          "offered_skill_id": "51e91de0-58ed-53e6-9870-d99f22f63ef9",
+          "score": 0.8076923076923077,
+          "factors": {
+            "skill": 1.0,
+            "reputation": 0.5,
+            "activity": 0.5,
+            "location": 1.0,
+            "availability": 1.0
+          },
+          "suggested_start": "2026-10-14T15:30:00+05:30",
+          "hierarchy_distance": 0
+        },
+        {
+          "provider_id": "cf64fbc9-c8cf-59d9-8ab0-ba4e5b85a4ef",
+          "offered_skill_id": "51e91de0-58ed-53e6-9870-d99f22f63ef9",
+          "score": 0.8076923076923077,
+          "factors": {
+            "skill": 1.0,
+            "reputation": 0.5,
+            "activity": 0.5,
+            "location": 1.0,
+            "availability": 1.0
+          },
+          "suggested_start": "2026-10-14T15:30:00+05:30",
+          "hierarchy_distance": 0
+        }
+      ]
+    }
+  ],
+  "caveat": "Local query timings and rankings are descriptive. Synthetic data does not establish recommendation quality. Precision@K requires supplied relevance labels."
+}

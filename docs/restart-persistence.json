@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "before": {
+    "users": 15,
+    "requests": 4,
+    "sessions": 2,
+    "credit_ledger": 16
+  },
+  "after": {
+    "users": 15,
+    "requests": 4,
+    "sessions": 2,
+    "credit_ledger": 16
+  },
+  "scope": "local PostgreSQL normal restart, synthetic data"
+}
