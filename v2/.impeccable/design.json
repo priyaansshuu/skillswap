@@ -1,0 +1,416 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-14T15:48:27.311Z",
+  "title": "Design System: SkillSwap",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Deep Coral"
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Deep Coral Hover"
+      },
+      "tint": {
+        "role": "primary",
+        "displayName": "Pale Coral"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink"
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper"
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Near White"
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Plum"
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Soft Border"
+      },
+      "field-border": {
+        "role": "neutral",
+        "displayName": "Field Border"
+      },
+      "placeholder": {
+        "role": "neutral",
+        "displayName": "Placeholder Plum"
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "Focus Rose"
+      },
+      "danger": {
+        "role": "primary",
+        "displayName": "Dark Rose"
+      },
+      "profile-tint": {
+        "role": "primary",
+        "displayName": "Profile Tint"
+      },
+      "profile-action": {
+        "role": "primary",
+        "displayName": "Profile Action"
+      },
+      "filter-surface": {
+        "role": "neutral",
+        "displayName": "Filter Stone"
+      },
+      "booking-surface": {
+        "role": "neutral",
+        "displayName": "Booking Blush"
+      },
+      "chip-surface": {
+        "role": "neutral",
+        "displayName": "Chip Surface"
+      },
+      "status-surface": {
+        "role": "status",
+        "displayName": "Status Surface"
+      },
+      "status-text": {
+        "role": "status",
+        "displayName": "Status Text"
+      },
+      "status-positive-surface": {
+        "role": "status",
+        "displayName": "Status Positive Surface"
+      },
+      "status-positive-text": {
+        "role": "status",
+        "displayName": "Status Positive Text"
+      },
+      "status-pending-surface": {
+        "role": "status",
+        "displayName": "Status Pending Surface"
+      },
+      "status-pending-text": {
+        "role": "status",
+        "displayName": "Status Pending Text"
+      },
+      "status-negative-surface": {
+        "role": "status",
+        "displayName": "Status Negative Surface"
+      },
+      "status-negative-text": {
+        "role": "status",
+        "displayName": "Status Negative Text"
+      },
+      "coral-ribbon": {
+        "role": "member-identity",
+        "displayName": "Coral Ribbon"
+      },
+      "coral-avatar": {
+        "role": "member-identity",
+        "displayName": "Coral Avatar"
+      },
+      "coral-initials": {
+        "role": "member-identity",
+        "displayName": "Coral Initials"
+      },
+      "blue-ribbon": {
+        "role": "member-identity",
+        "displayName": "Blue Ribbon"
+      },
+      "blue-avatar": {
+        "role": "member-identity",
+        "displayName": "Blue Avatar"
+      },
+      "blue-initials": {
+        "role": "member-identity",
+        "displayName": "Blue Initials"
+      },
+      "green-ribbon": {
+        "role": "member-identity",
+        "displayName": "Green Ribbon"
+      },
+      "green-avatar": {
+        "role": "member-identity",
+        "displayName": "Green Avatar"
+      },
+      "green-initials": {
+        "role": "member-identity",
+        "displayName": "Green Initials"
+      },
+      "lavender-ribbon": {
+        "role": "member-identity",
+        "displayName": "Lavender Ribbon"
+      },
+      "lavender-avatar": {
+        "role": "member-identity",
+        "displayName": "Lavender Avatar"
+      },
+      "lavender-initials": {
+        "role": "member-identity",
+        "displayName": "Lavender Initials"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Marketplace Display",
+        "purpose": "Homepage hero, with the authored 1000px and 760px overrides."
+      },
+      "headline": {
+        "displayName": "Page Headline",
+        "purpose": "Default h1 on operational pages; local overrides remain local."
+      },
+      "section": {
+        "displayName": "Section Heading",
+        "purpose": "Default h2; featured and panel heading overrides remain local."
+      },
+      "title": {
+        "displayName": "Content Title",
+        "purpose": "Default h3; member names have their own local adjustment."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragraphs; no explicit root body-size declaration."
+      },
+      "label": {
+        "displayName": "Field Label",
+        "purpose": "Associated form labels."
+      },
+      "action": {
+        "displayName": "Action",
+        "purpose": "Buttons, navigation and profile links."
+      },
+      "small": {
+        "displayName": "Supporting Text",
+        "purpose": "Hints and metadata."
+      },
+      "status": {
+        "displayName": "Written Status",
+        "purpose": "Compact transaction badges."
+      },
+      "wordmark": {
+        "displayName": "Coral Wordmark",
+        "purpose": "Header identity, with responsive and footer variants."
+      }
+    },
+    "shadows": [
+      {
+        "name": "button-hover",
+        "value": "0 4px 12px #7d303020",
+        "purpose": "Shared button hover only."
+      },
+      {
+        "name": "compact-navigation",
+        "value": "0 8px 20px #47323616",
+        "purpose": "Expanded main navigation at widths up to 1000px."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-background",
+        "value": "background 0.15s ease-out",
+        "purpose": "Shared button background feedback."
+      },
+      {
+        "name": "button-shadow",
+        "value": "box-shadow 0.15s ease-out",
+        "purpose": "Shared button hover lift."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "transition: none !important; animation: none !important; scroll-behavior: auto !important",
+        "purpose": "Global prefers-reduced-motion: reduce override."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "desktop-cap",
+        "value": "1600px",
+        "query": "(min-width: 1600px)"
+      },
+      {
+        "name": "medium-desktop",
+        "value": "1200px",
+        "query": "(max-width: 1200px)"
+      },
+      {
+        "name": "compact-navigation",
+        "value": "1000px",
+        "query": "(max-width: 1000px)"
+      },
+      {
+        "name": "phone-layout",
+        "value": "760px",
+        "query": "(max-width: 760px)"
+      }
+    ],
+    "browserSurfaces": {
+      "focusVisible": "outline: 3px solid #932435; outline-offset: 4px",
+      "searchFocusWithin": "outline: 2px solid var(--primary); outline-offset: 1px",
+      "selection": "background: #fbd1d2; color: #252326",
+      "caret": "var(--primary)",
+      "scrollbarThumb": "background: #ceaaaf; border-radius: 10px",
+      "scrollbarTrack": "background: #fff3f0",
+      "scrollbarGeometry": "width: 10px; height: 8px",
+      "linkUnderlineOffset": "4px",
+      "modalBackdrop": "#25232675"
+    },
+    "documentation": {
+      "mode": "scan",
+      "sourceFiles": [
+        "frontend/src/styles.css",
+        "frontend/src/main.tsx",
+        "frontend/src/components/ui.tsx",
+        "frontend/src/components/ProviderCard.tsx",
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/pages/discovery.tsx"
+      ],
+      "directionAuthority": ".impeccable/surface-brief.md",
+      "reviewAuthority": ".impeccable/review/finish-review.md",
+      "reviewDisposition": "Ship; 2 resolved, 0 unresolved",
+      "renderedEvidenceInspected": [
+        ".impeccable/review/hero-repro.png"
+      ],
+      "tonalRampPolicy": "No synthesized ramps: the stylesheet contains discrete identity and semantic colors, not an authored eight-step tonal scale.",
+      "previewPolicy": "Framework-free HTML/CSS examples translated from built styles; placeholder member labels are templates, not testimonials. Actual Nunito Sans is supplied by the host's self-hosted font imports.",
+      "scope": "Only DESIGN.md and this sidecar were refreshed; no source changes, detector run, or independent application test execution."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Shared filled action; visible focus, hover lift, and disabled state.",
+      "html": "<button class=\"ds-button\">Save changes</button>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--primary,#c83b46);color:white;border:1px solid var(--primary,#c83b46);border-radius:15px;padding:12px 24px;min-height:48px;font-family:'Nunito Sans',sans-serif;font-size:1rem;font-weight:800;text-decoration:none;cursor:pointer;transition:background 0.15s ease-out,box-shadow 0.15s ease-out}.ds-button:hover{background:#a82c39;color:white;text-decoration:none;box-shadow:0 4px 12px #7d303020}.ds-button:focus-visible{outline:3px solid #932435;outline-offset:4px;}.ds-button:disabled{cursor:not-allowed;opacity:0.6}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "White alternative action with coral text and field-colored border.",
+      "html": "<button class=\"ds-button ds-secondary\">Previous</button>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--primary,#c83b46);color:white;border:1px solid var(--primary,#c83b46);border-radius:15px;padding:12px 24px;min-height:48px;font-family:'Nunito Sans',sans-serif;font-size:1rem;font-weight:800;text-decoration:none;cursor:pointer;transition:background 0.15s ease-out,box-shadow 0.15s ease-out}.ds-button:hover{background:#a82c39;color:white;text-decoration:none;box-shadow:0 4px 12px #7d303020}.ds-button:focus-visible{outline:3px solid #932435;outline-offset:4px;}.ds-button:disabled{cursor:not-allowed;opacity:0.6}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}.ds-secondary{background:white;color:var(--primary,#c83b46);border-color:#d5c9ce}.ds-secondary:hover{background:#fff0ee;color:var(--primary,#c83b46)}"
+    },
+    {
+      "name": "Danger Button",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "Dark-rose destructive action retaining the shared hover treatment.",
+      "html": "<button class=\"ds-button ds-danger\">Remove offer</button>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--primary,#c83b46);color:white;border:1px solid var(--primary,#c83b46);border-radius:15px;padding:12px 24px;min-height:48px;font-family:'Nunito Sans',sans-serif;font-size:1rem;font-weight:800;text-decoration:none;cursor:pointer;transition:background 0.15s ease-out,box-shadow 0.15s ease-out}.ds-button:hover{background:#a82c39;color:white;text-decoration:none;box-shadow:0 4px 12px #7d303020}.ds-button:focus-visible{outline:3px solid #932435;outline-offset:4px;}.ds-button:disabled{cursor:not-allowed;opacity:0.6}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}.ds-danger{background:#923040}"
+    },
+    {
+      "name": "Text Button",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "Quiet retry or account action with underline feedback.",
+      "html": "<button class=\"ds-text-button\">Try again</button>",
+      "css": ".ds-text-button{border:0;background:transparent;color:var(--primary,#c83b46);font-family:'Nunito Sans',sans-serif;font-size:1rem;font-weight:800;padding:8px 0;text-align:left;cursor:pointer}.ds-text-button:hover{text-decoration:underline}.ds-text-button:focus-visible{outline:3px solid #932435;outline-offset:4px;}.ds-text-button:disabled{cursor:not-allowed;opacity:0.6}"
+    },
+    {
+      "name": "Labelled Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Native editable field with associated label, hint, and visible keyboard focus.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-field-city\">City or campus</label><input id=\"ds-field-city\" aria-describedby=\"ds-field-hint\" placeholder=\"City or campus\"><small id=\"ds-field-hint\">Shown on your public profile.</small></div>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:7px;margin-bottom:18px;font-family:'Nunito Sans',sans-serif;color:#252326;font-weight:700}.ds-field input{color:#252326;background:#fff;border:1px solid #d5c9ce;border-radius:12px;min-height:46px;padding:10px 13px;max-width:100%;font-family:inherit;font-size:1rem;font-weight:400;caret-color:var(--primary,#c83b46)}.ds-field input::placeholder{color:#716a71;opacity:1}.ds-field input:focus-visible{outline:3px solid #932435;outline-offset:4px;}.ds-field small{color:var(--muted,#635c62);font-size:0.9rem;line-height:1.5;font-weight:400}"
+    },
+    {
+      "name": "Main Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Dark bold marketplace navigation with a coral active link.",
+      "html": "<nav class=\"ds-main-nav\" aria-label=\"Main navigation\"><a href=\"#explore\" aria-current=\"page\">Explore skills</a><a href=\"#how-it-works\">How it works</a><a href=\"#profile\">Teach a skill</a></nav>",
+      "css": ".ds-main-nav{display:flex;align-items:center;justify-content:center;gap:28px;flex:1;font-family:'Nunito Sans',sans-serif}.ds-main-nav a{color:#252326;font-weight:800;white-space:nowrap;text-decoration:none}.ds-main-nav a[aria-current]{color:var(--primary,#c83b46)}.ds-main-nav a:hover{text-decoration:underline;text-underline-offset:4px}.ds-main-nav a:focus-visible{outline:3px solid #932435;outline-offset:4px;}@media(max-width:1200px){.ds-main-nav{gap:18px}}@media(max-width:1000px){.ds-main-nav{align-items:flex-start;flex-direction:column;gap:20px;background:#fff;border:1px solid var(--border,#e9dfe0);border-radius:18px;padding:24px;box-shadow:0 8px 20px #47323616}}"
+    },
+    {
+      "name": "Removable Skill Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Content chip for a saved offered skill or learning goal, with a remove action.",
+      "html": "<ul class=\"ds-chip-list\"><li>Offered skill <button aria-label=\"Remove offered skill\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M18 6 6 18M6 6l12 12\"/></svg></button></li></ul>",
+      "css": ".ds-chip-list{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px;padding:0;list-style:none;font-family:'Nunito Sans',sans-serif;color:#252326}.ds-chip-list li{display:flex;align-items:center;gap:8px;border-radius:10px;padding:8px 12px;background:#fff0ed;max-width:100%;overflow-wrap:anywhere}.ds-chip-list button{border:0;background:none;padding:2px;color:var(--primary,#c83b46);cursor:pointer}.ds-chip-list button:focus-visible{outline:3px solid #932435;outline-offset:4px;}"
+    },
+    {
+      "name": "Member Result Card",
+      "kind": "card",
+      "refersTo": "provider-card",
+      "description": "Semantic member template with pastel ribbon, initials, unrated state, and profile link.",
+      "html": "<article class=\"ds-provider-card\"><div class=\"ds-member-heading\"><div class=\"ds-avatar\" aria-hidden=\"true\">MN</div></div><h3>Member name</h3><p class=\"ds-card-meta\">Offered skill · Online</p><p class=\"ds-rating\">No reviews yet</p><p class=\"ds-bio\">Meet this member and explore the skills they can share.</p><a class=\"ds-card-link\" href=\"#member\">View profile <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-7-7 7 7-7 7\"/></svg></a></article>",
+      "css": ".ds-provider-card{border:1px solid var(--border,#e9dfe0);border-radius:20px;padding:16px;background:#fffdfd;display:flex;flex-direction:column;min-width:0;font-family:'Nunito Sans',sans-serif;color:#252326}.ds-member-heading{background:#fee4e1;border-radius:13px;display:flex;align-items:center;gap:20px;padding:12px;margin-bottom:13px}.ds-avatar{width:62px;height:62px;border-radius:50%;background:#ffd1cd;display:inline-flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;color:#a32839;flex-shrink:0}.ds-provider-card h3{font-size:1.15rem;font-weight:900;line-height:1.13;letter-spacing:-0.01em;text-wrap:balance;overflow-wrap:anywhere;margin:0 0 8px}.ds-card-meta{font-size:0.9rem;line-height:1.55;margin:0 0 8px}.ds-rating{color:#6c626a;font-size:0.9rem;line-height:1.55;margin:0 0 8px}.ds-bio{color:#49434a;line-height:1.45;overflow-wrap:anywhere;margin:14px 0 16px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}.ds-card-link{color:var(--primary,#c83b46);font-weight:800;margin-top:auto;text-decoration:none}.ds-card-link svg{vertical-align:middle;flex-shrink:0}.ds-card-link:hover{text-decoration:underline;text-underline-offset:4px}.ds-card-link:focus-visible{outline:3px solid #932435;outline-offset:4px;}"
+    },
+    {
+      "name": "Written Status Badges",
+      "kind": "custom",
+      "refersTo": "status",
+      "description": "Neutral and semantic transaction states; color supplements written labels.",
+      "html": "<span class=\"ds-status\">Cancelled</span> <span class=\"ds-status ds-positive\">Completed</span> <span class=\"ds-status ds-pending\">Requested</span> <span class=\"ds-status ds-negative\">Disputed</span>",
+      "css": ".ds-status{display:inline-block;padding:5px 11px;border-radius:8px;background:#f2efef;color:#575059;font-family:'Nunito Sans',sans-serif;font-size:0.78rem;font-weight:800;text-transform:capitalize;white-space:nowrap}.ds-positive{background:#e8f2e8;color:#315c36}.ds-pending{background:#fff0dc;color:#775121}.ds-negative{background:#f8e0e4;color:#843542}"
+    },
+    {
+      "name": "Skill Search",
+      "kind": "custom",
+      "refersTo": "skill-search",
+      "description": "Broad coral search shell with labelled native skill/mode controls and stacked phone layout.",
+      "html": "<form class=\"ds-skill-search\"><label class=\"ds-search-input\"><svg width=\"25\" height=\"25\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><input aria-label=\"What do you want to learn?\" placeholder=\"What do you want to learn?\" maxlength=\"100\"></label><label class=\"ds-search-mode\"><svg width=\"23\" height=\"23\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"20\" height=\"14\" x=\"2\" y=\"3\" rx=\"2\"/><path d=\"M12 17v4M8 21h8\"/></svg><select aria-label=\"Session mode\"><option>Online</option><option>In person</option><option>Any mode</option></select></label><button class=\"ds-button\">Find a skill <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-7-7 7 7-7 7\"/></svg></button></form>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--primary,#c83b46);color:white;border:1px solid var(--primary,#c83b46);border-radius:15px;padding:12px 24px;min-height:48px;font-family:'Nunito Sans',sans-serif;font-size:1rem;font-weight:800;text-decoration:none;cursor:pointer;transition:background 0.15s ease-out,box-shadow 0.15s ease-out}.ds-button:hover{background:#a82c39;color:white;text-decoration:none;box-shadow:0 4px 12px #7d303020}.ds-button:focus-visible{outline:3px solid #932435;outline-offset:4px;}.ds-button:disabled{cursor:not-allowed;opacity:0.6}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}.ds-skill-search{display:flex;align-items:stretch;gap:16px;padding:24px 28px;background:var(--tint,#feefee);border-radius:24px;font-family:'Nunito Sans',sans-serif;color:#252326}.ds-search-input,.ds-search-mode{display:flex;align-items:center;gap:18px;background:white;border-radius:16px;padding:14px 20px}.ds-search-input{flex:1;min-width:0}.ds-search-input input{border:0;outline:0;font-family:inherit;font-size:1.22rem;font-weight:400;color:#252326;width:100%;padding:0;min-height:36px;background:transparent;caret-color:var(--primary,#c83b46)}.ds-search-input input::placeholder{color:#716a71;opacity:1}.ds-search-input:focus-within{outline:2px solid var(--primary,#c83b46);outline-offset:1px}.ds-search-mode{flex:0 0 23%}.ds-search-mode select{border:0;border-radius:12px;padding:0 5px;width:100%;font-family:inherit;font-size:1.18rem;font-weight:400;min-height:36px;color:#252326;background:#fff;cursor:pointer}.ds-search-mode select:focus-visible{outline:3px solid #932435;outline-offset:4px;}.ds-skill-search svg{flex-shrink:0;vertical-align:middle}.ds-skill-search .ds-button{min-width:210px;font-size:1.2rem;border-radius:16px}@media(max-width:1200px){.ds-skill-search .ds-button{min-width:170px}}@media(max-width:1000px){.ds-skill-search{gap:12px;padding:20px}.ds-search-mode{flex-basis:24%}.ds-search-input,.ds-search-mode{padding:12px}.ds-skill-search .ds-button{min-width:150px;padding-inline:16px}.ds-search-input input,.ds-search-mode select{font-size:1rem}}@media(max-width:760px){.ds-skill-search{flex-direction:column;padding:16px;gap:12px;border-radius:22px}.ds-search-input,.ds-search-mode{padding:12px 16px;min-height:54px}.ds-search-mode{flex-basis:auto}.ds-skill-search .ds-button{width:100%;min-height:56px;font-size:1.1rem}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Welcoming Skill Marketplace",
+    "overview": "SkillSwap's approved world pairs an approachable, large-type marketplace with calm account screens. Warm paper, pale coral search surfaces, a coral wordmark, generous spacing, and rounded member silhouettes make finding a peer feel straightforward. The same identity continues through teaching, learning, credits, and administration.\n\nThis is a record of the built frontend, refreshed from the provisional direction after implementation and the independent Ship review on 2026-10-14. The authority is the approved warm-white, pale-coral, dark-text world and the actual stylesheet; this pass does not reopen the visual choice. Member identity uses semantic initials and line icons. Names, skill details, and ratings remain real UI text.",
+    "keyCharacteristics": [
+      "Warm paper and pale coral frame dark, readable content.",
+      "Rounded Nunito Sans headings provide a confident, welcoming hierarchy.",
+      "Broad search surfaces and restrained controls keep tasks clear.",
+      "Pastel initials distinguish members without photographs.",
+      "Sparse shadows, visible focus, and quiet hover feedback support use."
+    ],
+    "rules": [
+      {
+        "name": "The Readable State Rule.",
+        "body": "A pastel fill never replaces the written status. Member colors never imply achievement or trust.",
+        "section": "Colors"
+      },
+      {
+        "name": "The Honest Member Rule.",
+        "body": "Names, offered skills, initials, and rating summaries stay semantic text. Unrated members display \"No reviews yet\"; do not decorate them with invented stars, credentials, or testimonials.",
+        "section": "Typography"
+      },
+      {
+        "name": "The Reflow Rule.",
+        "body": "Preserve the search, member identity, and task action hierarchy as columns collapse. Do not shrink desktop controls into a phone-sized row.",
+        "section": "Layout"
+      },
+      {
+        "name": "The Quiet Feedback Rule.",
+        "body": "Shared buttons transition background and shadow over (0.15s) with `ease-out`. The built app has no authored entrance sequence. Reduced-motion preferences remove transitions and animation.",
+        "section": "Elevation & Depth"
+      }
+    ],
+    "dos": [
+      "Do keep the coral wordmark, warm paper ground, and pale-coral search identity consistent across public and account screens.",
+      "Do use the observed Nunito Sans hierarchy and self-hosted weights.",
+      "Do preserve readable written statuses, labelled fields, visible focus, and reduced-motion behavior.",
+      "Do use semantic initials and line icons with actual member information.",
+      "Do let search controls, member grids, and forms reflow at the recorded boundaries.",
+      "Do show minutes plainly and distinguish review ratings from reputation."
+    ],
+    "donts": [
+      "Don't replace controls or member data with rasterized mockup content.",
+      "Don't add photographs, invented reviews, credentials, testimonials, or marketing totals.",
+      "Don't use member pastels as a trust or status encoding.",
+      "Don't introduce dense shadow stacks or decorative entrance motion into this quiet system.",
+      "Don't imply that a request reserves credits before the teacher accepts it.",
+      "Don't hide transaction meaning or an error behind color alone."
+    ]
+  }
+}
