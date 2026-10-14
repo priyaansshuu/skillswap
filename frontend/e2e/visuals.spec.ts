@@ -22,13 +22,13 @@ test("desktop, phone, tablet and reference-panel layouts remain usable", async (
       ),
     ).toBe(true);
     await page.screenshot({
-      path: path.resolve("../.impeccable/review/" + name + ".png"),
+      path: path.resolve("../v2/.impeccable/review/" + name + ".png"),
       fullPage: true,
       animations: "disabled",
     });
     if (name === "desktop")
       await page.screenshot({
-        path: path.resolve("../.impeccable/review/hero-repro.png"),
+        path: path.resolve("../v2/.impeccable/review/hero-repro.png"),
         animations: "disabled",
       });
   }
@@ -36,7 +36,7 @@ test("desktop, phone, tablet and reference-panel layouts remain usable", async (
   await page.goto("/explore?q=React&mode=ONLINE");
   await expect(page.locator(".provider-card").first()).toBeVisible();
   await page.screenshot({
-    path: path.resolve("../.impeccable/review/results-desktop.png"),
+    path: path.resolve("../v2/.impeccable/review/results-desktop.png"),
     fullPage: true,
     animations: "disabled",
   });
@@ -53,7 +53,7 @@ test("desktop, phone, tablet and reference-panel layouts remain usable", async (
     ),
   ).toBe(true);
   await page.screenshot({
-    path: path.resolve("../.impeccable/review/results-mobile.png"),
+    path: path.resolve("../v2/.impeccable/review/results-mobile.png"),
     fullPage: true,
     animations: "disabled",
   });
@@ -66,7 +66,7 @@ test("desktop, phone, tablet and reference-panel layouts remain usable", async (
       .getByRole("link", { name: "Log in", exact: true }),
   ).toBeVisible();
   await page.screenshot({
-    path: path.resolve("../.impeccable/review/navigation-mobile.png"),
+    path: path.resolve("../v2/.impeccable/review/navigation-mobile.png"),
     fullPage: true,
     animations: "disabled",
   });
@@ -75,7 +75,7 @@ test("desktop, phone, tablet and reference-panel layouts remain usable", async (
     page.getByRole("heading", { name: "Welcome back" }),
   ).toBeVisible();
   await page.screenshot({
-    path: path.resolve("../.impeccable/review/login-mobile.png"),
+    path: path.resolve("../v2/.impeccable/review/login-mobile.png"),
     fullPage: true,
     animations: "disabled",
   });

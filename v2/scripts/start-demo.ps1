@@ -4,6 +4,7 @@ param(
 )
 $ErrorActionPreference = "Stop"
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+$frontendRoot = Join-Path (Split-Path -Parent $projectRoot) "frontend"
 if (-not $Python) {
     $venvPython = Join-Path $projectRoot ".venv\Scripts\python.exe"
     if (Test-Path -LiteralPath $venvPython) { $Python = $venvPython }
@@ -31,9 +32,9 @@ Push-Location $projectRoot
 try {
     & $Python -m alembic upgrade head
     if ($LASTEXITCODE -ne 0) { throw "Database migration failed. Check your local PostgreSQL service and .env." }
-    $frontendIndex = Join-Path $projectRoot "frontend\dist\index.html"
+    $frontendIndex = Join-Path $frontendRoot "dist\index.html"
     if (-not (Test-Path -LiteralPath $frontendIndex)) {
-        Push-Location (Join-Path $projectRoot "frontend")
+        Push-Location $frontendRoot
         try {
             & npm.cmd ci --no-audit --no-fund
             if ($LASTEXITCODE -ne 0) { throw "Frontend dependencies could not be installed." }

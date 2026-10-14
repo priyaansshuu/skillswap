@@ -156,7 +156,7 @@ test("one-account teaching and learning completes a real dual-confirmed exchange
       ),
     ).toBeVisible();
     await teacher.screenshot({
-      path: path.resolve("../.impeccable/review/session-completed.png"),
+      path: path.resolve("../v2/.impeccable/review/session-completed.png"),
       fullPage: true,
       animations: "disabled",
     });
@@ -194,7 +194,7 @@ test("one-account teaching and learning completes a real dual-confirmed exchange
       teacher.getByText("Minutes earned teaching", { exact: true }),
     ).toHaveCount(1);
     await teacher.screenshot({
-      path: path.resolve("../.impeccable/review/credits-after-transfer.png"),
+      path: path.resolve("../v2/.impeccable/review/credits-after-transfer.png"),
       fullPage: true,
       animations: "disabled",
     });

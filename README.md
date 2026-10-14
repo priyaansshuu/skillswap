@@ -1,4 +1,10 @@
-# SkillSwap backend
+# SkillSwap
+
+The current full app uses the React + TypeScript interface in [frontend/](frontend/) and the FastAPI + PostgreSQL backend in [v2/](v2/). Every member can teach and learn from one account. See the [local demo walkthrough](v2/docs/FRONTEND_DEMO.md) for setup and a real two-account exchange.
+
+From `frontend/`, run `npm ci` and `npm run build`. Configure the backend using `v2/.env.example`, then from `v2/` run `scripts/start-demo.ps1`. The combined app opens at http://127.0.0.1:8000.
+
+## Original backend
 
 A working FastAPI and PostgreSQL backend for the SkillSwap college DBMS project. It covers accounts, skill discovery, matching, requests, sessions, time banking, reviews, reputation, disputes and in-app notifications.
 

@@ -1,6 +1,6 @@
 # SkillSwap full local demo
 
-The React frontend and FastAPI backend now run together. A single account teaches and learns; public visitors browse without signing in. The built app uses initials avatars and actual database records.
+The React frontend in the repository's top-level `frontend/` folder and FastAPI backend in `v2/` run together. A single account teaches and learns; public visitors browse without signing in. The built app uses initials avatars and actual database records.
 
 ## Start on this laptop
 
@@ -11,14 +11,14 @@ Use the workspace launcher in outputs/Start_SkillSwap_Demo.ps1. It uses the exis
 Requirements: Python 3.12+, PostgreSQL, Node.js compatible with the pinned frontend dependencies (Node 24.14 verified), and Microsoft Edge for the supplied browser tests.
 
 1. Follow README.md to create the Python environment, local .env, and databases. Keep database credentials, JWT_SECRET, and DEMO_PASSWORD out of Git.
-2. From frontend/, run `npm ci` and `npm run build`.
+2. From the repository's top-level frontend/, run `npm ci` and `npm run build`.
 3. From v2/, run `.\.venv\Scripts\python.exe -m alembic upgrade head`.
 4. Seed the accounts you need. To preserve a chosen shared demo password, configure DEMO_PASSWORD in your ignored .env, load it into the process when running the CLI, or enter it when prompted. `python -m app.cli seed --blank-members 20` creates the customizable blank accounts; existing profiles and balances remain intact.
 5. Run `.\scripts\start-demo.ps1`. If the Python environment is elsewhere, pass `-Python C:\path\to\python.exe`.
 6. Open http://127.0.0.1:8000. The built frontend is served by FastAPI, including direct navigation to /profile, /credits, and other app routes.
 7. Stop only the managed app with `.\scripts\stop-demo.ps1`. This does not stop PostgreSQL or remove its data.
 
-For development, run FastAPI on port 8000 and `npm run dev` in frontend/. Vite runs on 5173 and proxies /api to FastAPI. Optional SKILLSWAP_API_URL changes the proxy target; never put database credentials or JWT secrets into frontend environment variables.
+For development, run FastAPI from v2/ on port 8000 and `npm run dev` in the top-level frontend/. Vite runs on 5173 and proxies /api to FastAPI. Optional SKILLSWAP_API_URL changes the proxy target; never put database credentials or JWT secrets into frontend environment variables.
 
 ## Two-account presentation
 

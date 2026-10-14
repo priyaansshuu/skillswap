@@ -6,7 +6,7 @@
 web
 
 ## Stack
-User-selected React + TypeScript with Vite, React Router, and TanStack Query. Existing FastAPI + PostgreSQL backend remains authoritative. The frontend belongs in `frontend/` within this backend's `v2/` directory.
+User-selected React + TypeScript with Vite, React Router, and TanStack Query. Existing FastAPI + PostgreSQL backend remains authoritative. The user requested publication in the repository's top-level `frontend/` directory; the backend remains in `v2/`.
 
 ## Users
 College students demonstrating and using peer skill exchange. Every ordinary account can both teach and learn. Administrators manage the skill hierarchy, suggestions, moderation, and disputes.

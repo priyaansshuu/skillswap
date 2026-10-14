@@ -19,7 +19,7 @@ test("public homepage renders real members and matches the approved viewport", a
     ),
   ).toBe(true);
   await page.screenshot({
-    path: path.resolve("../.impeccable/review/hero-repro.png"),
+    path: path.resolve("../v2/.impeccable/review/hero-repro.png"),
     animations: "disabled",
   });
   await page.getByRole("link", { name: "Explore all skills" }).click();

@@ -264,12 +264,12 @@
     "documentation": {
       "mode": "scan",
       "sourceFiles": [
-        "frontend/src/styles.css",
-        "frontend/src/main.tsx",
-        "frontend/src/components/ui.tsx",
-        "frontend/src/components/ProviderCard.tsx",
-        "frontend/src/components/Layout.tsx",
-        "frontend/src/pages/discovery.tsx"
+        "../frontend/src/styles.css",
+        "../frontend/src/main.tsx",
+        "../frontend/src/components/ui.tsx",
+        "../frontend/src/components/ProviderCard.tsx",
+        "../frontend/src/components/Layout.tsx",
+        "../frontend/src/pages/discovery.tsx"
       ],
       "directionAuthority": ".impeccable/surface-brief.md",
       "reviewAuthority": ".impeccable/review/finish-review.md",

@@ -38,3 +38,7 @@ Approved mockups and runtime captures are retained under `.impeccable/mocks/` an
 ## Delivery limits
 
 This is an executed local laptop demo. Docker startup was not rerun for this frontend release; native Windows Python/PostgreSQL startup was verified. Public deployment, production load, real student usage, password recovery, messaging, calls, maps and photo storage were not part of this build. Generated mockup sample members are replaced by actual API data. The package includes a compiled frontend for the combined app and reproducible source/lockfiles, but excludes database contents and local credentials.
+
+## Repository layout
+
+At the user's publication request, the frontend was moved to the repository's top-level `frontend/` folder. The backend remains in `v2/`. Startup, production asset serving, browser-test paths and OpenAPI type generation follow this layout. Git excludes installed dependencies, local environment files, generated builds and runtime/test logs.

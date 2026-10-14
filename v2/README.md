@@ -2,7 +2,7 @@
 
 A working FastAPI and PostgreSQL backend for the SkillSwap college DBMS project. It covers accounts, skill discovery, matching, requests, sessions, time banking, reviews, reputation, disputes and in-app notifications.
 
-The full React frontend is in `frontend/`. Visitors browse before login; every member can teach and learn. Build with `npm ci` and `npm run build` in that folder, then use `scripts/start-demo.ps1` to run the combined app at http://127.0.0.1:8000. [Full frontend demo and two-account walkthrough](docs/FRONTEND_DEMO.md).
+The full React frontend is in the repository's top-level [frontend/](../frontend/) folder. Visitors browse before login; every member can teach and learn. Build with `npm ci` and `npm run build` in that folder, then use `scripts/start-demo.ps1` from `v2/` to run the combined app at http://127.0.0.1:8000. [Full frontend demo and two-account walkthrough](docs/FRONTEND_DEMO.md).
 
 ## Start with Docker Desktop
 

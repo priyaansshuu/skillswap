@@ -153,7 +153,7 @@ app.add_middleware(
 
 
 # A built frontend can be served by FastAPI for a single-process local demo.
-frontend_dist = Path(__file__).resolve().parents[1] / "frontend" / "dist"
+frontend_dist = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 if (frontend_dist / "index.html").is_file():
     app.mount("/assets", StaticFiles(directory=frontend_dist / "assets"), name="frontend-assets")
 

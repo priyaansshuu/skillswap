@@ -71,7 +71,7 @@ def main():
     from app.cli import seed
 
     seed(blank_members=2)
-    frontend = ROOT / "frontend"
+    frontend = ROOT.parent / "frontend"
     node = shutil.which("node")
     if not node:
         raise RuntimeError("Install Node.js before running browser checks.")

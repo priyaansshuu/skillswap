@@ -9,7 +9,7 @@
     "preview": "vite preview --host 127.0.0.1",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "types:generate": "openapi-typescript ../docs/openapi.json -o src/api/schema.d.ts"
+    "types:generate": "openapi-typescript ../v2/docs/openapi.json -o src/api/schema.d.ts"
   },
   "dependencies": {
     "@fontsource/nunito-sans": "5.3.0",
