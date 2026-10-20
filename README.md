@@ -1,98 +1,69 @@
 # SkillSwap
 
-The current full app uses the React + TypeScript interface in [frontend/](frontend/) and the FastAPI + PostgreSQL backend in [v2/](v2/). Every member can teach and learn from one account. See the [local demo walkthrough](v2/docs/FRONTEND_DEMO.md) for setup and a real two-account exchange.
+SkillSwap is a campus skill-exchange platform where members earn time credits by teaching and spend them to learn. Each person uses one account, profile, and wallet for both roles. The current local demonstration combines a React and TypeScript frontend, a FastAPI backend, and PostgreSQL.
 
-From `frontend/`, run `npm ci` and `npm run build`. Configure the backend using `v2/.env.example`, then from `v2/` run `scripts/start-demo.ps1`. The combined app opens at http://127.0.0.1:8000.
+## What the application supports
 
-## Original backend
+- Account registration, login, profiles, teaching offers, learning goals, and availability.
+- Public skill discovery and provider matching by skill relevance, reputation, recent activity, location, and schedule availability. When no exact-skill providers qualify, matching can fall back through the skill hierarchy.
+- Requests, scheduled sessions, confirmations, in-app notifications, reviews, disputes, and administrative actions.
+- Time credits recorded as integer minutes. Accepting a session reserves credits; both participants confirm completion before one ledger transfer is settled. Reversals are linked to the original accounting event and audited.
 
-A working FastAPI and PostgreSQL backend for the SkillSwap college DBMS project. It covers accounts, skill discovery, matching, requests, sessions, time banking, reviews, reputation, disputes and in-app notifications.
+Matching weights and reputation decay settings are configurable demonstration parameters. The repository does not report a user study establishing ranking quality or improved outcomes.
 
-## Start with Docker Desktop
+## Architecture
 
-Use Docker Desktop with Linux containers. From this project folder:
+| Component | Role |
+| --- | --- |
+| `frontend/` | React, TypeScript, and Vite single-page application. |
+| `v2/` | FastAPI routes and services, Pydantic validation, SQLAlchemy database access, and JWT bearer authentication. |
+| PostgreSQL | Authoritative application records and integrity constraints. Alembic migrations manage schema changes. |
+| In-app notifications | Stored in PostgreSQL and delivered through the API; external email and SMS delivery are outside the local demo. |
 
-```powershell
-Copy-Item .env.example .env
-```
+The database has 18 application tables covering accounts, skills and user-skill associations, availability, requests and matching history, sessions and reservations, credit ledger entries, reviews and reputation events, disputes, notifications, blocks, administrator audit, and authentication attempts. The accompanying [database notes](v2/docs/DATABASE.md) and [schema reference](v2/docs/schema.sql) describe the model and integrity rules.
 
-Edit `.env`: replace `POSTGRES_PASSWORD` with a strong **URL-safe** password and `JWT_SECRET` with a random secret of at least 32 characters. Do not publish this file. If Python is installed, generate each value with:
+## Run the local demo
 
-```powershell
-python -c "import secrets; print(secrets.token_urlsafe(48))"
-```
+The documented launcher uses PowerShell. A fresh setup requires Python 3.12 or later, PostgreSQL 18, Node.js 22.12 or later, and a PostgreSQL database named `skillswap`. Follow the detailed [backend setup](v2/README.md) and [frontend walkthrough](v2/docs/FRONTEND_DEMO.md) if you need Docker, database creation, or account-seeding details.
 
-Start the database and API, then choose a password for the synthetic demo accounts:
-
-```powershell
-docker compose up --build -d
-docker compose exec api python -m app.cli seed
-```
-
-Open **http://localhost:8000/docs** for the interactive API. Log in through `POST /api/v1/auth/token` using `learner@example.com`, `teacher@example.com`, or `admin@example.com` and the password supplied to the seed command. Swagger's **Authorize** button accepts the email as username. Each login lasts 30 minutes.
-
-Stop the demo with `docker compose down`; this preserves the database volume. Do not add `-v` unless you intend to erase the demo database.
-
-## Start with installed Python and PostgreSQL
-
-Requirements: Python 3.12+ and PostgreSQL 18. Create databases `skillswap` and `skillswap_test`, owned by your local database user. The test database must be disposable and its name must end in `_test`.
+From the repository root, install and build the frontend, then prepare the backend environment:
 
 ```powershell
-python -m venv .venv
+Set-Location frontend
+npm ci
+npm run build
+Set-Location ../v2
+py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 Copy-Item .env.example .env
 ```
 
-Edit `DATABASE_URL`, `TEST_DATABASE_URL`, and `JWT_SECRET` in `.env`. Use `postgresql+psycopg://` URLs; percent-encode any special characters in a database password.
+Edit `v2/.env` with the connection details for your local PostgreSQL database and a random `JWT_SECRET` of at least 32 characters. Keep `.env` and all secret values out of Git. Create the database before running migrations. Then seed synthetic demonstration data and start the app:
 
 ```powershell
-.\.venv\Scripts\python.exe -m alembic upgrade head
-.\.venv\Scripts\python.exe -m app.cli seed
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+.\.venv\Scripts\python.exe -m app.cli seed --blank-members 20
+.\scripts\start-demo.ps1
 ```
 
-The API does not create tables automatically: migrations are the source of truth. `seed` creates 15 clearly synthetic accounts, 10 skills, future availability, exact/fallback sample requests, and one historical completed exchange. It preserves existing accounts/passwords and does not duplicate starter grants on repeat runs. For a clean non-demo administrator, run `python -m app.cli create-admin` instead.
+The launcher applies migrations, builds the frontend if needed, and serves the combined application at **http://127.0.0.1:8000**. The interactive API documentation is available at `/docs`; readiness is available at `/health/ready`. Stop the managed application with `v2/scripts/stop-demo.ps1`. This does not remove PostgreSQL data.
 
-## What to demonstrate
+A Docker Compose setup is documented in [v2/README.md](v2/README.md) and [v2/compose.yaml](v2/compose.yaml). Docker startup was not included in the repository's recorded verification run.
 
-1. Learner logs in and reads their 120-minute starter balance.
-2. Learner opens a React request and generates ranked providers.
-3. Learner selects a candidate; teacher accepts, creating a session and holding 60 minutes.
-4. Participants start the session when its scheduled start arrives.
-5. After its end, both confirm the same duration. A single credit transfer completes the exchange.
-6. Learner reviews the teacher; skill-specific reputation changes.
-7. Show Pandas falling back to a Python provider, and inspect score components.
-8. Show the administrator's comparison of three matching models.
+## Development
 
-See [the API walkthrough](docs/WALKTHROUGH.md) for endpoint details. The automated tests use a controlled clock to exercise completion immediately; the normal API never bypasses the real schedule. The historical seeded session provides completed-exchange data for an immediate demonstration.
+Run the API from `v2/` on port 8000 and the Vite development server from `frontend/` on port 5173. Vite proxies API requests to the backend. See the [frontend demo guide](v2/docs/FRONTEND_DEMO.md) for the full local workflow and two-account walkthrough.
 
-## Test and inspect
+## Verification and evaluation
 
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
-.\.venv\Scripts\python.exe scripts/run_tests.py
-.\.venv\Scripts\python.exe -m ruff check .
-```
+The repository's [verification record](v2/docs/VERIFICATION.md), dated 14 October 2026, reports 32 passing automated tests with no skips in a PostgreSQL run, plus API smoke, persistence, migration, and lint evidence. The checks used synthetic data. They support the documented local workflows; they do not establish recommendation quality, real-student outcomes, public deployment, or production readiness. Ranking relevance, acceptance, completion, satisfaction, response time, and repeat use are proposed measures for future evaluation.
 
-The script reads `.env`, checks the database name, migrates that dedicated database and runs the suite. Tests truncate its application tables. Without a test database, integration tests report skipped rather than falsely passing. See [verification evidence](docs/VERIFICATION.md).
+To see the complete test scope, prerequisites, and database-safety notes, follow the test instructions in [v2/README.md](v2/README.md).
 
-## Frontend integration
+## Repository map
 
-- Base URL: `http://localhost:8000/api/v1`.
-- Send `Authorization: Bearer <access_token>` on protected endpoints.
-- Token endpoint uses form fields `username` and `password`; other writes use JSON.
-- List responses contain `items`, `limit`, and `offset`; maximum page size is 100.
-- API timestamps include a UTC offset. Naive timestamps are rejected.
-- Errors contain `error.code`, `error.message`, `error.details`, and a request ID.
-- Configure `CORS_ORIGINS` for your frontend's actual origin.
-- [OpenAPI contract](docs/openapi.json) contains request and response schemas.
+- `frontend/` — React and TypeScript application, API client, unit tests, and browser checks.
+- `v2/app/` — FastAPI application, services, schemas, authentication, and CLI.
+- `v2/alembic/` — versioned PostgreSQL migrations and integrity guards.
+- `v2/tests/` — backend API, accounting, concurrency, security, and workflow tests.
+- `v2/docs/` — API, database, setup, demo, evaluation, and verification documentation.
 
-## Project contents
-
-- `app/`: API routes, domain services, schemas, authentication and configuration.
-- `alembic/`: versioned schema and database integrity guards.
-- `tests/`: API, accounting, concurrency, security and demo tests.
-- `docs/`: walkthrough, database design, evaluation and executed verification evidence.
-- `tasks/`: implementation decisions and completed build checkpoints.
-
-This version targets a local college demo. Public deployment, email/password recovery, email/SMS delivery and real-student operation require additional work. Matching weights, score updates and decay are configurable proposed models; the seeded examples are not research results.
