@@ -1,13 +1,18 @@
 :root {
   font-family: "Nunito Sans", sans-serif;
-  color: #252326;
-  background: #fefcfa;
+  color: var(--text);
+  background: var(--page);
   font-synthesis: none;
   font-weight: 400;
   --primary: #c83b46;
   --tint: #feefee;
   --muted: #635c62;
   --border: #e9dfe0;
+  --page: #fefcfa;
+  --surface: #fffdfd;
+  --surface-raised: #fff;
+  --text: #252326;
+  --field-border: #d5c9ce;
   --radius: 22px;
 }
 * {
@@ -230,6 +235,24 @@ input[type="checkbox"] {
   display: flex;
   align-items: center;
   gap: 24px;
+}
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.theme-toggle:hover {
+  background: var(--tint);
 }
 .login-link {
   color: #252326;
@@ -1519,6 +1542,185 @@ td {
 .activity-tabs button.active {
   color: var(--primary);
   border-bottom: 2px solid var(--primary);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --primary: #ff929c;
+  --tint: #302229;
+  --muted: #bcb1ba;
+  --border: #403741;
+  --page: #141216;
+  --surface: #1d1a20;
+  --surface-raised: #242027;
+  --text: #f4edf3;
+  --field-border: #554b56;
+}
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] .main-nav a,
+:root[data-theme="dark"] .login-link,
+:root[data-theme="dark"] .account-link,
+:root[data-theme="dark"] .subjects a,
+:root[data-theme="dark"] .bio,
+:root[data-theme="dark"] .activity-tabs a,
+:root[data-theme="dark"] .activity-tabs button {
+  color: var(--text);
+}
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] .search-input,
+:root[data-theme="dark"] .search-mode,
+:root[data-theme="dark"] .button.secondary,
+:root[data-theme="dark"] .theme-toggle,
+:root[data-theme="dark"] .main-nav {
+  color: var(--text);
+  background: var(--surface-raised);
+  border-color: var(--field-border);
+}
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder {
+  color: #bcb1ba;
+}
+:root[data-theme="dark"] .site-header,
+:root[data-theme="dark"] .site-footer {
+  color: var(--muted);
+}
+:root[data-theme="dark"] .provider-card,
+:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .filter-dialog,
+:root[data-theme="dark"] .auth-page,
+:root[data-theme="dark"] .booking-panel,
+:root[data-theme="dark"] .credit-summary > div {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--border);
+}
+:root[data-theme="dark"] .skill-search,
+:root[data-theme="dark"] .how-strip,
+:root[data-theme="dark"] .filters,
+:root[data-theme="dark"] .empty,
+:root[data-theme="dark"] .audit-details,
+:root[data-theme="dark"] .intro-callout,
+:root[data-theme="dark"] .notification-unread {
+  color: var(--text);
+  background: var(--surface-raised);
+}
+:root[data-theme="dark"] .member-heading,
+:root[data-theme="dark"] .profile-button,
+:root[data-theme="dark"] .chip-list li,
+:root[data-theme="dark"] .confirmation-list p {
+  color: var(--text);
+  background: #302229;
+}
+:root[data-theme="dark"] .avatar,
+:root[data-theme="dark"] .compact .avatar {
+  color: #ffd8dc;
+  background: #51313a;
+}
+:root[data-theme="dark"] .hue-1,
+:root[data-theme="dark"] .hue-1 .avatar,
+:root[data-theme="dark"] .compact .hue-1 .avatar {
+  color: #d7eaff;
+  background: #25384a;
+}
+:root[data-theme="dark"] .hue-2,
+:root[data-theme="dark"] .hue-2 .avatar,
+:root[data-theme="dark"] .compact .hue-2 .avatar {
+  color: #ddf2df;
+  background: #283d30;
+}
+:root[data-theme="dark"] .hue-3,
+:root[data-theme="dark"] .hue-3 .avatar,
+:root[data-theme="dark"] .compact .hue-3 .avatar {
+  color: #f0ddff;
+  background: #3a2d48;
+}
+:root[data-theme="dark"] .how-strip > div {
+  border-color: var(--border);
+}
+:root[data-theme="dark"] .how-strip li > span {
+  color: var(--primary);
+  background: #493039;
+}
+:root[data-theme="dark"] .how-strip li p,
+:root[data-theme="dark"] .page-intro,
+:root[data-theme="dark"] .rating,
+:root[data-theme="dark"] .status,
+:root[data-theme="dark"] .activity-tabs a {
+  color: var(--muted);
+}
+:root[data-theme="dark"] .status {
+  background: #39333d;
+}
+:root[data-theme="dark"] .status-completed,
+:root[data-theme="dark"] .status-approved,
+:root[data-theme="dark"] .status-fulfilled,
+:root[data-theme="dark"] .status-resolved {
+  color: #b9e7bf;
+  background: #253b2b;
+}
+:root[data-theme="dark"] .status-requested,
+:root[data-theme="dark"] .status-pending,
+:root[data-theme="dark"] .status-scheduled,
+:root[data-theme="dark"] .status-open {
+  color: #f2d49d;
+  background: #463723;
+}
+:root[data-theme="dark"] .status-rejected,
+:root[data-theme="dark"] .status-disputed,
+:root[data-theme="dark"] .status-reversed {
+  color: #f1b7bf;
+  background: #472c35;
+}
+:root[data-theme="dark"] .notice.error {
+  color: #ffd9dd;
+  background: #492a31;
+}
+:root[data-theme="dark"] .success {
+  color: #d2f0d5;
+  background: #263b2b;
+}
+:root[data-theme="dark"] .session-notice {
+  color: #f4dcae;
+  background: #453923;
+}
+:root[data-theme="dark"] .activity-tabs,
+:root[data-theme="dark"] th,
+:root[data-theme="dark"] td,
+:root[data-theme="dark"] .offer-list li,
+:root[data-theme="dark"] .list > li,
+:root[data-theme="dark"] .preview-result {
+  border-color: var(--border);
+}
+:root[data-theme="dark"] .button.secondary:hover {
+  background: #342c36;
+}
+:root[data-theme="dark"] .button:not(.secondary) {
+  color: #1c1114;
+  background: #e76b76;
+  border-color: #e76b76;
+}
+:root[data-theme="dark"] .button:not(.secondary):hover {
+  background: #f08790;
+}
+:root[data-theme="dark"] .text-button,
+:root[data-theme="dark"] .chip-list button {
+  color: var(--primary);
+}
+:root[data-theme="dark"] .skip-link {
+  color: var(--text);
+  background: var(--surface-raised);
+}
+:root[data-theme="dark"] ::selection {
+  color: var(--text);
+  background: #64404b;
+}
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #665663;
+}
+:root[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #211d24;
 }
 @media (max-width: 1000px) {
   .main-nav.open .mobile-account {
