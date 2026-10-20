@@ -1,12 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink, Navigate, Outlet, useLocation } from "react-router-dom";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, Moon, Sun } from "lucide-react";
 import { useAuth } from "../auth-context";
 import { ErrorNotice, Loading } from "./ui";
 
+type Theme = "light" | "dark";
+
+function getInitialTheme(): Theme {
+  try {
+    const saved = window.localStorage.getItem("skillswap-theme");
+    if (saved === "light" || saved === "dark") return saved;
+  } catch {
+    // Storage may be unavailable in private browsing; use the system preference.
+  }
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
 export function Layout() {
   const auth = useAuth(),
-    [open, setOpen] = useState(false);
+    [open, setOpen] = useState(false),
+    [theme, setTheme] = useState<Theme>(getInitialTheme);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      window.localStorage.setItem("skillswap-theme", theme);
+    } catch {
+      // Keep the in-memory choice even when the browser blocks storage.
+    }
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", theme === "dark" ? "#141216" : "#c83b46");
+  }, [theme]);
+
   return (
     <>
       <a className="skip-link" href="#main">
@@ -16,6 +44,16 @@ export function Layout() {
         <Link to="/" className="brand" aria-label="SkillSwap home">
           SkillSwap
         </Link>
+        <button
+          className="theme-toggle"
+          type="button"
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          aria-pressed={theme === "dark"}
+          onClick={() => setTheme((current) => current === "dark" ? "light" : "dark")}
+        >
+          {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
+          <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
+        </button>
         <button
           className="menu-button"
           aria-label={open ? "Close navigation" : "Open navigation"}
